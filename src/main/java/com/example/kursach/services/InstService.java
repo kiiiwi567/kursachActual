@@ -19,7 +19,7 @@ public class InstService {
     }
     public void saveInst (Instrument newInst) {
         newInst.setID(++id);
-        if (newInst.getName().isEmpty()) newInst.setName("AdminEblan"); //todo
+        if (newInst.getName().isEmpty()) newInst.setName("AdminEblan"); //todo ghjk
         instruments.add(newInst);
     }
     public void delInst (int ID) {
