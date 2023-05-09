@@ -1,35 +1,34 @@
 package com.example.kursach.services;
 
 import com.example.kursach.models.Instrument;
+import com.example.kursach.repositories.InstRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.ArrayList;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class InstService {
-    private List<Instrument> instruments = new ArrayList<>();
-    private int id = 0;
+    private final InstRepository instRepository;
 
-    {
-        instruments.add(new Instrument(++id,"testName1",10.10,1,"testDescription"));
-        instruments.add(new Instrument(++id,"testName2",10.10,2,"testDescriptiongyutuy"));
+    public List<Instrument> listReturn(String instName) {
+        if (instName != null) return instRepository.findByInstName(instName);
+        return instRepository.findAll();
     }
-    public List<Instrument> listReturn() {
-        return instruments;
-    }
+
     public void saveInst (Instrument newInst) {
-        newInst.setID(++id);
-        if (newInst.getName().isEmpty()) newInst.setName("AdminEblan"); //todo ghjk
-        instruments.add(newInst);
+        newInst.setIdInst(instRepository.findTopByOrderByIdInstDesc().getIdInst() + 1);
+        //todo check for invalid entries + error message if so, no saving
+        log.info("Saving new {}", newInst);
+        instRepository.save(newInst);
     }
-    public void delInst (int ID) {
-        instruments.removeIf(instrument -> instrument.getID() == ID);
+    public void delInst (Long instId) {
+        instRepository.deleteById(instId);
     }
 
-    public Instrument getInstByID (int ID){
-        for (Instrument instrument: instruments){
-            if (instrument.getID() == ID) return instrument;
-        }
-        return null;
+    public Instrument getInstByID (Long instId){
+        return instRepository.findById(instId).orElse(null);
     }
 }

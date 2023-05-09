@@ -1,58 +1,83 @@
 package com.example.kursach.models;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "instruments")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Instrument {
-    private Integer ID;
-    private String name;
-    private double price;
-    private int category;
-    private String description;
+    @Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    private Long idInst;
 
-    public Instrument(Integer ID, String name, double price, int category, String description) {
-        this.ID = ID;
-        this.name = name;
-        this.price = price;
-        this.category = category;
-        this.description = description; //maybe redo
+    @Column
+    private String instName;
+
+    @Column
+    private Integer idCateg;
+
+    @Column
+    private Double instPrice;
+
+    @Column
+    private Integer instQuantity;
+
+    @Column
+    private String instDescription;
+
+    public Long getIdInst() {
+        return this.idInst;
     }
 
-    public Integer getID() {
-        return this.ID;
+    public String getInstName() {
+        return this.instName;
     }
 
-    public String getName() {
-        return this.name;
+    public Integer getIdCateg() {
+        return this.idCateg;
     }
 
-    public double getPrice() {
-        return this.price;
+    public Double getInstPrice() {
+        return this.instPrice;
     }
 
-    public int getCategory() {
-        return this.category;
+    public Integer getInstQuantity() {
+        return this.instQuantity;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getInstDescription() {
+        return this.instDescription;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setIdInst(Long idInst) {
+        this.idInst = idInst;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setInstName(String instName) {
+        this.instName = instName;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setIdCateg(Integer idCateg) {
+        this.idCateg = idCateg;
     }
 
-    public void setCategory(int category) {
-        this.category = category;
+    public void setInstPrice(Double instPrice) {
+        this.instPrice = instPrice;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setInstQuantity(Integer instQuantity) {
+        this.instQuantity = instQuantity;
+    }
+
+    public void setInstDescription(String instDescription) {
+        this.instDescription = instDescription;
     }
 
     public boolean equals(final Object o) {
@@ -60,17 +85,25 @@ public class Instrument {
         if (!(o instanceof Instrument)) return false;
         final Instrument other = (Instrument) o;
         if (!other.canEqual((Object) this)) return false;
-        final Object this$ID = this.getID();
-        final Object other$ID = other.getID();
-        if (this$ID == null ? other$ID != null : !this$ID.equals(other$ID)) return false;
-        final Object this$name = this.getName();
-        final Object other$name = other.getName();
-        if (this$name == null ? other$name != null : !this$name.equals(other$name)) return false;
-        if (Double.compare(this.getPrice(), other.getPrice()) != 0) return false;
-        if (this.getCategory() != other.getCategory()) return false;
-        final Object this$description = this.getDescription();
-        final Object other$description = other.getDescription();
-        if (this$description == null ? other$description != null : !this$description.equals(other$description))
+        final Object this$idInst = this.getIdInst();
+        final Object other$idInst = other.getIdInst();
+        if (this$idInst == null ? other$idInst != null : !this$idInst.equals(other$idInst)) return false;
+        final Object this$instName = this.getInstName();
+        final Object other$instName = other.getInstName();
+        if (this$instName == null ? other$instName != null : !this$instName.equals(other$instName)) return false;
+        final Object this$idCateg = this.getIdCateg();
+        final Object other$idCateg = other.getIdCateg();
+        if (this$idCateg == null ? other$idCateg != null : !this$idCateg.equals(other$idCateg)) return false;
+        final Object this$instPrice = this.getInstPrice();
+        final Object other$instPrice = other.getInstPrice();
+        if (this$instPrice == null ? other$instPrice != null : !this$instPrice.equals(other$instPrice)) return false;
+        final Object this$instQuantity = this.getInstQuantity();
+        final Object other$instQuantity = other.getInstQuantity();
+        if (this$instQuantity == null ? other$instQuantity != null : !this$instQuantity.equals(other$instQuantity))
+            return false;
+        final Object this$instDescription = this.getInstDescription();
+        final Object other$instDescription = other.getInstDescription();
+        if (this$instDescription == null ? other$instDescription != null : !this$instDescription.equals(other$instDescription))
             return false;
         return true;
     }
@@ -82,19 +115,22 @@ public class Instrument {
     public int hashCode() {
         final int PRIME = 59;
         int result = 1;
-        final Object $ID = this.getID();
-        result = result * PRIME + ($ID == null ? 43 : $ID.hashCode());
-        final Object $name = this.getName();
-        result = result * PRIME + ($name == null ? 43 : $name.hashCode());
-        final long $price = Double.doubleToLongBits(this.getPrice());
-        result = result * PRIME + (int) ($price >>> 32 ^ $price);
-        result = result * PRIME + this.getCategory();
-        final Object $description = this.getDescription();
-        result = result * PRIME + ($description == null ? 43 : $description.hashCode());
+        final Object $idInst = this.getIdInst();
+        result = result * PRIME + ($idInst == null ? 43 : $idInst.hashCode());
+        final Object $instName = this.getInstName();
+        result = result * PRIME + ($instName == null ? 43 : $instName.hashCode());
+        final Object $idCateg = this.getIdCateg();
+        result = result * PRIME + ($idCateg == null ? 43 : $idCateg.hashCode());
+        final Object $instPrice = this.getInstPrice();
+        result = result * PRIME + ($instPrice == null ? 43 : $instPrice.hashCode());
+        final Object $instQuantity = this.getInstQuantity();
+        result = result * PRIME + ($instQuantity == null ? 43 : $instQuantity.hashCode());
+        final Object $instDescription = this.getInstDescription();
+        result = result * PRIME + ($instDescription == null ? 43 : $instDescription.hashCode());
         return result;
     }
 
     public String toString() {
-        return "Instrument(ID=" + this.getID() + ", name=" + this.getName() + ", price=" + this.getPrice() + ", category=" + this.getCategory() + ", description=" + this.getDescription() + ")";
+        return "Instrument(idInst=" + this.getIdInst() + ", instName=" + this.getInstName() + ", idCateg=" + this.getIdCateg() + ", instPrice=" + this.getInstPrice() + ", instQuantity=" + this.getInstQuantity() + ", instDescription=" + this.getInstDescription() + ")";
     }
 }

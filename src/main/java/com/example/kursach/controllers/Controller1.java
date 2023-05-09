@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -16,14 +17,14 @@ public class Controller1 {
     private final InstService instService;
 
     @GetMapping("/")
-    public String mainPage (Model model)
+    public String mainPage (@RequestParam(name = "instName", required = false) String instName, Model model)
     {
-        model.addAttribute("instrument", instService.listReturn());
+        model.addAttribute("instrument", instService.listReturn(instName));
         return "mainPage";
     }
 
     @GetMapping("/instrument/{ID}")
-    public String infoInstrument(@PathVariable int ID, Model model)
+    public String infoInstrument(@PathVariable Long ID, Model model)
     {
         model.addAttribute("instrument", instService.getInstByID(ID));
         return "instInfo";
@@ -36,7 +37,7 @@ public class Controller1 {
     }
 
     @PostMapping("/instrument/delete/{ID}")
-    public String deleteInstrument(@PathVariable("ID") int ID){
+    public String deleteInstrument(@PathVariable("ID") Long ID){
         instService.delInst(ID);
         return "redirect:/";
     }
