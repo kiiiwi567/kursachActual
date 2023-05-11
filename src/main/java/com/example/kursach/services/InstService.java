@@ -17,9 +17,10 @@ import java.util.List;
 public class InstService {
     private final InstRepository instRepository;
 
-    public List<Instrument> listReturn(String instName) {
+    public List<Instrument> listReturn(String instName, String idCateg) {
+
         if (instName != null) return instRepository.findByInstName(instName);
-        return instRepository.findAll();
+        return instRepository.findAllByCategory(idCateg);
     }
 
     public void saveInst (Instrument newInst, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {

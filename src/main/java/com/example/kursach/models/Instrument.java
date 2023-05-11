@@ -21,8 +21,8 @@ public class Instrument {
     @Column
     private String instName;
 
-    @Column
-    private Integer CategoryIdCateg;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    private Category category;
 
     @Column
     private Double instPrice;
