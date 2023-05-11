@@ -19,38 +19,41 @@ import java.io.IOException;
 @RequestMapping("/category")
 public class InstController {
     private final InstService instService;
+    private final CategService categService;
 
     @GetMapping("/{idCateg}")
-    public String categoryPage (@PathVariable String idCateg,
-                                @RequestParam(name = "instName", required = false) String instName,
+    public String categoryPage (@RequestParam(name = "instName", required = false) String instName,
+                                @PathVariable Long idCateg,
                                 Model model)
     {
         model.addAttribute("instrument", instService.listReturn(instName, idCateg));
-        //model.addAttribute("idCateg", idCateg);
+        model.addAttribute("category", categService.getCategById(idCateg));
         return "categoryPage";
     }
 
     @GetMapping("/{idCateg}/instrument/{ID}")
-    public String infoInstrument(@PathVariable Long ID, Model model)
+    public String infoInstrument(@PathVariable("ID") Long ID, @PathVariable("idCateg") Long idCateg, Model model)
     {
+        model.addAttribute("idCateg", idCateg);
         model.addAttribute("instrument", instService.getInstByID(ID));
         model.addAttribute("images", instService.getInstByID(ID).getImages());
         return "instInfo";
     }
 
     @PostMapping("/{idCateg}/instrument/create")
-    public String createInstrument(@RequestParam("file1") MultipartFile file1,
-                                   @RequestParam("file2") MultipartFile file2,
-                                   @RequestParam("file3") MultipartFile file3,
+    public String createInstrument(@RequestParam(name = "file1",required = false) MultipartFile file1,
+                                   @RequestParam(name = "file2",required = false) MultipartFile file2,
+                                   @RequestParam(name = "file3",required = false) MultipartFile file3,
                                    Instrument newInst) throws IOException {
         instService.saveInst(newInst, file1, file2, file3);
-        return "redirect:/";
+        return "redirect:/category/{idCateg}";
     }
 
     @PostMapping("/{idCateg}/instrument/delete/{ID}")
-    public String deleteInstrument(@PathVariable("ID") Long ID){
+    public String deleteInstrument(@PathVariable("ID") Long ID,@PathVariable ("idCateg") Long idCateg, Model model){
+        model.addAttribute("idCateg", idCateg);
         instService.delInst(ID);
-        return "redirect:/";
+        return "redirect:/category/{idCateg}";
     }
 
 }

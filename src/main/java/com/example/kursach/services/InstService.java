@@ -17,10 +17,10 @@ import java.util.List;
 public class InstService {
     private final InstRepository instRepository;
 
-    public List<Instrument> listReturn(String instName, String idCateg) {
+    public List<Instrument> listReturn(String instName, Long idCateg) {
 
         if (instName != null) return instRepository.findByInstName(instName);
-        return instRepository.findAllByCategory(idCateg);
+        return instRepository.findAllByCategoryIdCateg(idCateg);
     }
 
     public void saveInst (Instrument newInst, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
@@ -49,9 +49,8 @@ public class InstService {
         log.info("Saving new Instrument. Title:{}, Author:{}", newInst.getInstName(), newInst.getAuthor());
 
         Instrument instFromDb = instRepository.save(newInst);
-        instFromDb.setPreviewImageId(instFromDb.getImages().get(0).getImgId());
-
-        //instRepository.save(newInst);
+        if ((file1.getSize() != 0) | (file2.getSize() != 0) | (file3.getSize() != 0))
+            instFromDb.setPreviewImageId(instFromDb.getImages().get(0).getImgId());
     }
 
     private Image toImageEntity(MultipartFile file) throws IOException {

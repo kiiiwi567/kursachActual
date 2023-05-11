@@ -19,7 +19,7 @@ public class Category {
     private Long idCateg;
     @Column
     private String categName;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "category")
+    @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn (name = "categoryIdCateg")
     private List<Instrument> instruments = new ArrayList<>();
 }

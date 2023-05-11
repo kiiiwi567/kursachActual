@@ -11,13 +11,12 @@
 </#list>
 <b>Название товара: </b> ${instrument.instName}<br>
 <b>Цена товара: </b> ${instrument.instPrice}<br>
-<#--<b>Категория товара: </b> ${instrument.categoryIdCateg}<br>-->
-<b>Категория товара: </b> ${instrument.category}<br>
+<b>Категория товара: </b> ${instrument.categoryIdCateg}<br>
 <b>Описание товара: </b> ${instrument.instDescription}<br>
 <b>Количество товара: </b> ${instrument.instQuantity}<br>
 <b>Автор: </b>${instrument.author}<br>
 <hr>
-<form action="/instrument/delete/${instrument.idInst}" method="post">
+<form action="delete/${instrument.idInst}" method="post">
     <input type ="submit" value="Удоли"/>
 </form>
 </body>

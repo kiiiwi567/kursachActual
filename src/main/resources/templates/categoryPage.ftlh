@@ -5,21 +5,21 @@
 </head>
 <body>
 <h1>fuck yeah</h1>
-<h4>товары товарчики</h4>
-<form action="/" method="get">
+<h4>${category.categName}</h4>
+<form action="/category/${category.idCateg}" method="get">
     Поиск: <input type="text" name="instName"><br/>
     <input type="submit" value ="Поиск"/>
 </form>
 <#list instrument as instrument>
     <div>
-        <p><b><a href = "category/${idCateg}/instrument/${instrument.idInst}"> ${instrument.instName} </a></b>${instrument.instPrice} BYN </p>
+        <p><b><a href = "${idCateg}/instrument/${instrument.idInst}"> ${instrument.instName} </a></b>${instrument.instPrice} BYN </p>
     </div>
     <#else>
     <h3>Товаров нет</h3>
 </#list>
 <hr>
 <h3>Создать новый товар</h3>
-<form action="/instrument/create" method="post" enctype="multipart/form-data">
+<form action="/category/${category.idCateg}/instrument/create" method="post" enctype="multipart/form-data">
     Название: <input type="text" name="instName"/><br><br>
     Цена: <input type="number" name="instPrice"/><br><br>
     Категория: <input type="number" name="categoryIdCateg"/><br><br>
