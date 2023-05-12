@@ -21,8 +21,8 @@ public class Instrument {
     @Column
     private String instName;
 
-    @Column(name = "categoryIdCateg")
-    private Long categoryIdCateg;
+    @Column(name = "idCateg")
+    private Long idCateg;
 
     @Column
     private Double instPrice;
@@ -36,8 +36,8 @@ public class Instrument {
     @Column
     private String author;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "instrument")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY/*, mappedBy = "instrument"*/)
+    @JoinColumn (name = "idInst", referencedColumnName = "idInst")
     private List<Image> images = new ArrayList<>();
     private Long previewImageId;
     private LocalDateTime dateOfCreated;
@@ -47,7 +47,7 @@ public class Instrument {
         dateOfCreated = LocalDateTime.now();
     }
     public void addImageToProduct(Image image) {
-        image.setInstrument(this);
+        image.setIdInst(this.getIdInst());
         images.add(image);
     }
 }

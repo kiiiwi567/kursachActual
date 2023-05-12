@@ -27,6 +27,6 @@ public class Image {
     private boolean isPreviewImage;
     @Lob
     private byte[] bytes;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    private Instrument instrument;
+    @Column (name = "idInst")
+    private Long idInst;
 }

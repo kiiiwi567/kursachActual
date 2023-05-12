@@ -20,7 +20,7 @@ public class InstService {
     public List<Instrument> listReturn(String instName, Long idCateg) {
 
         if (instName != null) return instRepository.findByInstName(instName);
-        return instRepository.findAllByCategoryIdCateg(idCateg);
+        return instRepository.findAllByIdCateg(idCateg);
     }
 
     public void saveInst (Instrument newInst, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {

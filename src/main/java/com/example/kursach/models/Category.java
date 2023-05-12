@@ -20,6 +20,6 @@ public class Category {
     @Column
     private String categName;
     @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn (name = "categoryIdCateg")
+    @JoinColumn (name = "idCateg", referencedColumnName = "idCateg")
     private List<Instrument> instruments = new ArrayList<>();
 }

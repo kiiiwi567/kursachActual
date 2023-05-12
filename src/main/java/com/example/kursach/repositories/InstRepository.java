@@ -8,5 +8,5 @@ import java.util.List;
 public interface InstRepository extends JpaRepository<Instrument, Long> {
     List<Instrument> findByInstName (String InstName);
     Instrument findTopByOrderByIdInstDesc();
-    List<Instrument> findAllByCategoryIdCateg(Long idCateg);
+    List<Instrument> findAllByIdCateg(Long idCateg);
 }
