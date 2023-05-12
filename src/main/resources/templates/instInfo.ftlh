@@ -4,10 +4,14 @@
     <title> neMainPageTitle </title>
 </head>
 <body>
-<h1>fuck yeah</h1>
+<h1><a href = "/"> mainFuckingPage </a> | <a href = "/login"> Войти в аккаунт </a></h1>
+<form action = "/logout" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <input type="submit" value="Выйти"/>
+</form>
 <h4>инфа по товарчику</h4>
 <#list images as img>
-    <img src="/images/${img.imgId}" height="100px"/><br><br>
+    <img src="/images/${img.idImg}" height="100px"/><br><br>
 </#list>
 <b>Название товара: </b> ${instrument.instName}<br>
 <b>Цена товара: </b> ${instrument.instPrice}<br>

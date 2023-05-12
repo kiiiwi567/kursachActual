@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column//(name = "id")
-    private Long imgId;
+    @Column(name = "idImg")
+    private Long idImg;
     @Column//(name = "name")
     private String imgName;
     @Column//(name = "originalFileName")

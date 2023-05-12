@@ -4,7 +4,11 @@
     <title> categoryPage </title>
 </head>
 <body>
-<h1>fuck yeah</h1>
+<h1><a href = "/"> mainFuckingPage </a> | <a href = "/login"> Войти в аккаунт </a></h1>
+<form action = "/logout" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <input type="submit" value="Выйти"/>
+</form>
 <h4>${category.categName}</h4>
 <form action="/category/${category.idCateg}" method="get">
     Поиск: <input type="text" name="instName"><br/>

@@ -4,7 +4,11 @@
     <title> mainPageTitle </title>
 </head>
 <body>
-<h1>fuck yeah</h1>
+<h1>fuck yeah | <a href = "/login"> Войти в аккаунт </a></h1>
+<form action = "/logout" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <input type="submit" value="Выйти"/>
+</form>
 <h2>Категории</h2>
 <#list category as category>
     <div>

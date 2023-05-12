@@ -50,7 +50,7 @@ public class InstService {
 
         Instrument instFromDb = instRepository.save(newInst);
         if ((file1.getSize() != 0) | (file2.getSize() != 0) | (file3.getSize() != 0))
-            instFromDb.setPreviewImageId(instFromDb.getImages().get(0).getImgId());
+            instFromDb.setPreviewImageId(instFromDb.getImages().get(0).getIdImg());
     }
 
     private Image toImageEntity(MultipartFile file) throws IOException {
