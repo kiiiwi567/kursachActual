@@ -2,13 +2,16 @@ package com.example.kursach.services;
 
 import com.example.kursach.models.Image;
 import com.example.kursach.models.Instrument;
+import com.example.kursach.models.User;
 import com.example.kursach.repositories.InstRepository;
+import com.example.kursach.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -16,6 +19,7 @@ import java.util.List;
 @Slf4j
 public class InstService {
     private final InstRepository instRepository;
+    private final UserRepository userRepository;
 
     public List<Instrument> listReturn(String instName, Long idCateg) {
 
@@ -23,8 +27,8 @@ public class InstService {
         return instRepository.findAllByIdCateg(idCateg);
     }
 
-    public void saveInst (Instrument newInst, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
-
+    public void saveInst (Principal principal, Instrument newInst, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
+        newInst.setUser(getUserByPrincipal(principal));
         newInst.setIdInst(instRepository.findTopByOrderByIdInstDesc().getIdInst() + 1);
 
         Image image1;
@@ -46,11 +50,16 @@ public class InstService {
         }
 
         //todo check for invalid entries + error message if so, no saving
-        log.info("Saving new Instrument. Title:{}, Author:{}", newInst.getInstName(), newInst.getAuthor());
+        log.info("Saving new Instrument. Title:{}, Author email:{}", newInst.getInstName(), newInst.getUser().getUserEmail());
 
         Instrument instFromDb = instRepository.save(newInst);
         if ((file1.getSize() != 0) | (file2.getSize() != 0) | (file3.getSize() != 0))
             instFromDb.setPreviewImageId(instFromDb.getImages().get(0).getIdImg());
+    }
+
+    public User getUserByPrincipal(Principal principal) {
+        if (principal == null) return new User();
+        return userRepository.findByUserEmail(principal.getName());
     }
 
     private Image toImageEntity(MultipartFile file) throws IOException {

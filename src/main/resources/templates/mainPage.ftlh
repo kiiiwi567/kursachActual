@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> mainPageTitle </title>
+    <title> mainPage </title>
 </head>
 <body>
-<h1>fuck yeah | <a href = "/login"> Войти в аккаунт </a></h1>
-<form action = "/logout" method="post">
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <input type="submit" value="Выйти"/>
-</form>
+<h1><a href = "/"> mainFuckingPage </a></h1>
+<#if user.userEmail??>
+<h3>Имя пользователя: ${user.username}
+    <form action = "/logout" method="post">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="submit" value="Выйти"/>
+    </form>
+<#else>
+    <a href = "/login">Войти</a>
+</#if>
 <h2>Категории</h2>
 <#list category as category>
     <div>

@@ -16,14 +16,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean createUser(User user) {
+    public String createUser(User user) {
         String userEmail = user.getUserEmail();
-        if (userRepository.findByUserEmail(userEmail) != null) return false;
+        if (userRepository.findByUserEmail(user.getUserEmail()) != null) return "emailTaken";
+        if (userRepository.findByUserPhone(user.getUserPhone()) != null) return "phoneTaken";
         user.setActive(true);
         user.getRoles().add(Role.ROLE_CLIENT);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         log.info("Saving new User with email: {}", userEmail);
         userRepository.save(user);
-        return true;
+        return "0";
     }
 }

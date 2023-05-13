@@ -1,6 +1,6 @@
 package com.example.kursach.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -33,13 +33,17 @@ public class Instrument {
     @Column
     private String instDescription;
 
-    @Column
-    private String author;
+  /*  @Column
+    private String author;*/
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY/*, mappedBy = "instrument"*/)
     @JoinColumn (name = "idInst", referencedColumnName = "idInst")
     private List<Image> images = new ArrayList<>();
     private Long previewImageId;
+
+    @ManyToOne (cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn (name = "idUser")
+    private User user;
     private LocalDateTime dateOfCreated;
 
     @PrePersist
@@ -47,7 +51,7 @@ public class Instrument {
         dateOfCreated = LocalDateTime.now();
     }
     public void addImageToProduct(Image image) {
-        image.setIdInst(this.getIdInst());
+        image.setInstrument(this);
         images.add(image);
     }
 }

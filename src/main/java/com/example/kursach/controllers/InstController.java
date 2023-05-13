@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 
 
 @Controller
@@ -23,20 +24,22 @@ public class InstController {
 
     @GetMapping("/{idCateg}")
     public String categoryPage (@RequestParam(name = "instName", required = false) String instName,
-                                @PathVariable Long idCateg,
+                                @PathVariable Long idCateg, Principal principal,
                                 Model model)
     {
         model.addAttribute("instrument", instService.listReturn(instName, idCateg));
         model.addAttribute("category", categService.getCategById(idCateg));
+        model.addAttribute("user", instService.getUserByPrincipal(principal));
         return "categoryPage";
     }
 
     @GetMapping("/{idCateg}/instrument/{ID}")
-    public String infoInstrument(@PathVariable("ID") Long ID, @PathVariable("idCateg") Long idCateg, Model model)
+    public String infoInstrument(@PathVariable("ID") Long ID, @PathVariable("idCateg") Long idCateg, Principal principal, Model model)
     {
         model.addAttribute("idCateg", idCateg);
         model.addAttribute("instrument", instService.getInstByID(ID));
         model.addAttribute("images", instService.getInstByID(ID).getImages());
+        model.addAttribute("user", instService.getUserByPrincipal(principal));
         return "instInfo";
     }
 
@@ -44,8 +47,8 @@ public class InstController {
     public String createInstrument(@RequestParam(name = "file1",required = false) MultipartFile file1,
                                    @RequestParam(name = "file2",required = false) MultipartFile file2,
                                    @RequestParam(name = "file3",required = false) MultipartFile file3,
-                                   Instrument newInst) throws IOException {
-        instService.saveInst(newInst, file1, file2, file3);
+                                   Instrument newInst, Principal principal) throws IOException {
+        instService.saveInst(principal ,newInst, file1, file2, file3);
         return "redirect:/category/{idCateg}";
     }
 

@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> neMainPageTitle </title>
+    <title> ${instrument.instName} Info </title>
 </head>
 <body>
-<h1><a href = "/"> mainFuckingPage </a> | <a href = "/login"> Войти в аккаунт </a></h1>
-<form action = "/logout" method="post">
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <input type="submit" value="Выйти"/>
-</form>
-<h4>инфа по товарчику</h4>
+<h1><a href = "/"> mainFuckingPage </a></h1>
+<#if user.userEmail??>
+<h3>Имя пользователя: ${user.username}
+    <form action = "/logout" method="post">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="submit" value="Выйти"/>
+    </form>
+    <#else>
+        <a href = "/login">Войти</a>
+    </#if>
+<h4><b>${instrument.instName}</b></h4><br>
 <#list images as img>
     <img src="/images/${img.idImg}" height="100px"/><br><br>
 </#list>
@@ -18,10 +23,13 @@
 <b>Категория товара: </b> ${instrument.idCateg}<br>
 <b>Описание товара: </b> ${instrument.instDescription}<br>
 <b>Количество товара: </b> ${instrument.instQuantity}<br>
-<b>Автор: </b>${instrument.author}<br>
-<hr>
-<form action="delete/${instrument.idInst}" method="post">
-    <input type ="submit" value="Удоли"/>
-</form>
+<b>Автор: </b>${instrument.user.username}<br>
+<#if user.userEmail??>
+    <hr>
+    <form action="delete/${instrument.idInst}" method="post">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type ="submit" value="Удоли"/>
+    </form>
+</#if>
 </body>
 </html>

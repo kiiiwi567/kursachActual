@@ -4,7 +4,7 @@
     <title>loginPage</title>
 </head>
 <body>
-<h1>fuck yeah</h1><hr>
+<h1><a href = "/"> mainFuckingPage </a></h1><hr>
 <h4>Авторизация</h4>
 <form action="/login" method="post">
     Эл. почта: <input type="email" name="username"><br><br>
@@ -12,6 +12,6 @@
     <input type="hidden" name="_csrf" value="${_csrf.token}">
     <input type="submit" value="Вход"/>
 </form>
-<a href="/registration">Зарегистрироваться</a>
+<p>Нет аккаунта? <a href="/registration">Зарегистрируйся!</a>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.example.kursach.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +27,9 @@ public class Image {
     private boolean isPreviewImage;
     @Lob
     private byte[] bytes;
-    @Column (name = "idInst")
-    private Long idInst;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn (name = "idInst")
+    private Instrument instrument;
+    /*@Column (name = "idInst")
+    private Long idInst;*/
 }
