@@ -50,6 +50,9 @@ public class User implements UserDetails {
 
     private LocalDateTime dateOfCreated;
 
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private Bucket bucket;
+
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();

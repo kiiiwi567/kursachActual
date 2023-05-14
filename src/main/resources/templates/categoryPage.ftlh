@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title> categoryPage </title>
 </head>
@@ -21,15 +21,47 @@
 <h4>${category.categName}</h4>
 <form action="/category/${category.idCateg}" method="get">
     Поиск: <input type="text" name="instName"><br/>
+    <div>
+        minPrice: <input type="range" name="minPrice" oninput="this.nextElementSibling.value = this.value" min="0" max="9999">
+    </div>
+
+    <div>
+        maxPrice: <input type="range" name="maxPrice" oninput="this.nextElementSibling.value = this.value" min="1" max="10000">
+    </div>
+    <p>Сортировать по:</p>
+    <div>
+        <label><input type="checkbox" name="sortByName"> Названию</label>
+        <label><input type="checkbox" name="sortByPrice"> Цене</label>
+    </div>
     <input type="submit" value ="Поиск"/>
 </form>
-<#list instrument as instrument>
+
+<#--<#list instrument as instrument>
     <div>
         <p><b><a href = "${idCateg}/instrument/${instrument.idInst}"> ${instrument.instName} </a></b>${instrument.instPrice} BYN </p>
     </div>
     <#else>
     <h3>Товаров нет</h3>
-</#list>
+</#list>-->
+<table border="1">
+    <tr>
+        <th>Название</th>
+        <th>Цена</th>
+        <th></th>
+    </tr>
+    <#list instrument as instrument>
+    <tr>
+        <th><a href = "${idCateg}/instrument/${instrument.idInst}"> ${instrument.instName} </a></th>
+        <th>${instrument.instPrice} BYN</th>
+        <th>
+            <form action="/bucket/${instrument.idInst}" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <input type ="submit" value="Добавить в корзину"/>
+            </form>
+        </th>
+    </tr>
+    </#list>
+
 <#if user.isAdmin()>
     <hr>
     <h3>Создать новый товар</h3>

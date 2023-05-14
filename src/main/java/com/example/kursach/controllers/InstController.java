@@ -1,39 +1,44 @@
 package com.example.kursach.controllers;
 
-import com.example.kursach.models.Instrument;
-import com.example.kursach.models.Category;
+import com.example.kursach.models.*;
 import com.example.kursach.services.CategService;
 import com.example.kursach.services.InstService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/category")
+@RequestMapping("/category/{idCateg}")
 public class InstController {
     private final InstService instService;
     private final CategService categService;
+    //private final Bucket bucket;
 
-    @GetMapping("/{idCateg}")
+    @GetMapping("")
     public String categoryPage (@RequestParam(name = "instName", required = false) String instName,
+                                @RequestParam(name = "minPrice", required = false) Double minPrice,
+                                @RequestParam(name = "maxPrice", required = false) Double maxPrice,
+                                @RequestParam(name = "sortByName", required = false) boolean sortByName,
+                                @RequestParam(name = "sortByPrice", required = false) boolean sortByPrice,
                                 @PathVariable Long idCateg, Principal principal,
                                 Model model)
     {
-        model.addAttribute("instrument", instService.listReturn(instName, idCateg));
+        model.addAttribute("instrument", instService.listReturn(instName, idCateg, minPrice, maxPrice, sortByName, sortByPrice));
         model.addAttribute("category", categService.getCategById(idCateg));
         model.addAttribute("user", instService.getUserByPrincipal(principal));
         return "categoryPage";
     }
 
-    @GetMapping("/{idCateg}/instrument/{ID}")
+    @GetMapping("/instrument/{ID}")
     public String infoInstrument(@PathVariable("ID") Long ID, @PathVariable("idCateg") Long idCateg, Principal principal, Model model)
     {
         model.addAttribute("idCateg", idCateg);
@@ -43,7 +48,7 @@ public class InstController {
         return "instInfo";
     }
 
-    @PostMapping("/{idCateg}/instrument/create")
+    @PostMapping("/instrument/create")
     public String createInstrument(@RequestParam(name = "file1",required = false) MultipartFile file1,
                                    @RequestParam(name = "file2",required = false) MultipartFile file2,
                                    @RequestParam(name = "file3",required = false) MultipartFile file3,
@@ -53,7 +58,7 @@ public class InstController {
         return "redirect:/category/{idCateg}";
     }
 
-    @PostMapping("/{idCateg}/instrument/delete/{ID}")
+    @PostMapping("/instrument/delete/{ID}")
     public String deleteInstrument(@PathVariable("ID") Long ID,@PathVariable ("idCateg") Long idCateg, Model model){
         model.addAttribute("idCateg", idCateg);
         instService.delInst(ID);
@@ -61,7 +66,7 @@ public class InstController {
     }
 
 
-    @PostMapping("/{idCateg}/instrument/edit/{ID}")
+    @PostMapping("/instrument/edit/{ID}")
      public String editInstrument(@PathVariable("ID") Long ID, @PathVariable("idCateg") Long idCateg, Principal principal, Model model){
          model.addAttribute("idCateg", idCateg);
          model.addAttribute("instrument", instService.getInstByID(ID));
@@ -69,7 +74,7 @@ public class InstController {
          model.addAttribute("user", instService.getUserByPrincipal(principal));
          return "editInst";
      }
-     @PostMapping("/{idCateg}/instrument/edit/{ID}/1")
+     @PostMapping("/instrument/edit/{ID}/1")
      public String editInstrument(@RequestParam(name = "file1",required = false) MultipartFile file1,
                                   @RequestParam(name = "file2",required = false) MultipartFile file2,
                                   @RequestParam(name = "file3",required = false) MultipartFile file3,
@@ -80,6 +85,4 @@ public class InstController {
          instService.saveInst(principal ,editedInst, file1, file2, file3, isEdit);
          return "redirect:/category/{idCateg}/instrument/{ID}";
      }
-
-
 }

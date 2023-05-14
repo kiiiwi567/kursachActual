@@ -8,11 +8,11 @@
         <hr>
         <h3>Редактировать товар ${instrument.instName}</h3>
         <form action="/category/${idCateg}/instrument/edit/${instrument.idInst}/1" method="post" enctype="multipart/form-data">
-            Название: ${instrument.instName} <input type="text" name="instName"/><br><br>
-            Цена: ${instrument.instPrice} <input type="number" name="instPrice" /><br><br>
-            Категория: ${instrument.idCateg} <input type="number" name="idCateg" /><br><br>
-            Описание: ${instrument.instDescription} <input type="text" name="instDescription" /><br><br>
-            Количество товара: ${instrument.instQuantity} <input type="number" name="instQuantity" /><br><br>
+            Название: ${instrument.instName} <input type="text" name="instName" value="${instrument.instName}"/><br><br>
+            Цена: ${instrument.instPrice} <input type="number" name="instPrice" value=${instrument.instPrice}/><br><br>
+            Категория: ${instrument.idCateg} <input type="number" name="idCateg" value=${instrument.idCateg}/><br><br>
+            Описание: ${instrument.instDescription} <input type="text" name="instDescription" value="${instrument.instDescription}"/><br><br>
+            Количество товара: ${instrument.instQuantity} <input type="number" name="instQuantity" value=${instrument.instQuantity}/><br><br>
             <#list images as img>
                 <img src="/images/${img.idImg}" height="100px"/><br><br>
             </#list>

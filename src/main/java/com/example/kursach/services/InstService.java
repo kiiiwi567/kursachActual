@@ -1,5 +1,6 @@
 package com.example.kursach.services;
 
+import com.example.kursach.models.Bucket;
 import com.example.kursach.models.Image;
 import com.example.kursach.models.Instrument;
 import com.example.kursach.models.User;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -20,9 +22,20 @@ import java.util.List;
 public class InstService {
     private final InstRepository instRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
+    private final BucketServiceImpl bucketService;
 
-    public List<Instrument> listReturn(String instName, Long idCateg) {
-
+    public List<Instrument> listReturn(String instName, Long idCateg, Double minPrice,
+                                       Double maxPrice, boolean sortByName, boolean sortByPrice) {
+        if (sortByName & sortByPrice) {
+            return instRepository.findAllByIdCategOrderByInstNameAscInstPriceAsc(idCateg);
+        } else {
+            if (sortByName) return instRepository.findAllByIdCategOrderByInstName(idCateg);
+            if (sortByPrice) return  instRepository.findAllByIdCategOrderByInstPrice(idCateg);
+        }
+        if (minPrice!=null | maxPrice!=null){
+            return instRepository.findAllByInstPriceBetweenAndIdCateg(minPrice, maxPrice, idCateg);
+        }
         if (instName != null) return instRepository.findByInstName(instName);
         return instRepository.findAllByIdCateg(idCateg);
     }
@@ -79,5 +92,22 @@ public class InstService {
 
     public Instrument getInstByID(Long instId) {
         return instRepository.findById(instId).orElse(null);
+    }
+    /*public List<Instrument> getAllInstById(List<Long> idInstList){
+        return instRepository.findAllById(idInstList);
+    }*/
+
+    public void addToUserBucket(Long idInst, String username) {
+        User user = userService.findByUserName(username);
+        if (user == null) throw new RuntimeException("User not found - " + username);
+
+        Bucket bucket = user.getBucket();
+        if (bucket == null) {
+            Bucket newBucket = bucketService.createBucket(user, Collections.singletonList(idInst));
+            user.setBucket(newBucket);
+            userRepository.save(user);
+        } else {
+            bucketService.addInstruments(bucket, Collections.singletonList(idInst));
+        }
     }
 }
