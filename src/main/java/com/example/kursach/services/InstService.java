@@ -27,9 +27,10 @@ public class InstService {
         return instRepository.findAllByIdCateg(idCateg);
     }
 
-    public void saveInst (Principal principal, Instrument newInst, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
+    public void saveInst(Principal principal, Instrument newInst, MultipartFile file1, MultipartFile file2, MultipartFile file3, boolean isEdit) throws IOException {
         newInst.setUser(getUserByPrincipal(principal));
-        newInst.setIdInst(instRepository.findTopByOrderByIdInstDesc().getIdInst() + 1);
+
+        if (!isEdit) newInst.setIdInst(instRepository.findTopByOrderByIdInstDesc().getIdInst() + 1);
 
         Image image1;
         Image image2;
@@ -72,11 +73,11 @@ public class InstService {
         return image;
     }
 
-    public void delInst (Long instId) {
+    public void delInst(Long instId) {
         instRepository.deleteById(instId);
     }
 
-    public Instrument getInstByID (Long instId){
+    public Instrument getInstByID(Long instId) {
         return instRepository.findById(instId).orElse(null);
     }
 }

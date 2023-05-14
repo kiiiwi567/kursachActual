@@ -10,7 +10,7 @@
         <form action="/category/${idCateg}/instrument/edit/${instrument.idInst}/1" method="post" enctype="multipart/form-data">
             Название: ${instrument.instName} <input type="text" name="instName"/><br><br>
             Цена: ${instrument.instPrice} <input type="number" name="instPrice" /><br><br>
-            Категория: ${instrument.idCateg} <input type="number" name="categoryIdCateg" /><br><br>
+            Категория: ${instrument.idCateg} <input type="number" name="idCateg" /><br><br>
             Описание: ${instrument.instDescription} <input type="text" name="instDescription" /><br><br>
             Количество товара: ${instrument.instQuantity} <input type="number" name="instQuantity" /><br><br>
             <#list images as img>
