@@ -11,6 +11,9 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="submit" value="Выйти"/>
     </form>
+    <#if user.isAdmin()>
+        <a href="/adminPage"> Панель администратора</a>
+    </#if>
     <#else>
         <a href = "/login">Войти</a>
     </#if>
@@ -24,11 +27,16 @@
 <b>Описание товара: </b> ${instrument.instDescription}<br>
 <b>Количество товара: </b> ${instrument.instQuantity}<br>
 <b>Автор: </b>${instrument.user.username}<br>
-<#if user.userEmail??>
+<#if user.isAdmin()>
+    <hr>
+    <form action="edit/${instrument.idInst}" method="post">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type ="submit" value="Редактировать"/>
+    </form>
     <hr>
     <form action="delete/${instrument.idInst}" method="post">
         <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type ="submit" value="Удоли"/>
+        <input type ="submit" value="Удалить"/>
     </form>
 </#if>
 </body>

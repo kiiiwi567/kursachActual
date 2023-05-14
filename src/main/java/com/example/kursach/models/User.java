@@ -55,6 +55,9 @@ public class User implements UserDetails {
         dateOfCreated = LocalDateTime.now();
     }
 
+    //Security check
+    public boolean isAdmin() {return roles.contains(Role.ROLE_ADMIN);}
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -64,6 +67,8 @@ public class User implements UserDetails {
     public String getUsername() {
         return userEmail;
     }
+
+    public String getUserNickname(){return userName;}
 
     @Override
     public boolean isAccountNonExpired() {

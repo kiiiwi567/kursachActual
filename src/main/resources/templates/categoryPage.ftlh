@@ -11,6 +11,9 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="submit" value="Выйти"/>
     </form>
+    <#if user.isAdmin()>
+        <a href="/adminPage"> Панель администратора</a>
+    </#if>
 <#else>
     <a href = "/login">Войти</a>
 </#if>
@@ -27,8 +30,7 @@
     <#else>
     <h3>Товаров нет</h3>
 </#list>
-
-<#if user.email??>
+<#if user.isAdmin()>
     <hr>
     <h3>Создать новый товар</h3>
     <form action="/category/${category.idCateg}/instrument/create" method="post" enctype="multipart/form-data">

@@ -59,4 +59,21 @@ public class InstController {
         return "redirect:/category/{idCateg}";
     }
 
+    @PostMapping("/{idCateg}/instrument/edit/{ID}")
+    public String editInstrument(@PathVariable("ID") Long ID, @PathVariable("idCateg") Long idCateg, Principal principal, Model model){
+        model.addAttribute("idCateg", idCateg);
+        model.addAttribute("instrument", instService.getInstByID(ID));
+        model.addAttribute("images", instService.getInstByID(ID).getImages());
+        model.addAttribute("user", instService.getUserByPrincipal(principal));
+        return "editInst";
+    }
+    @PostMapping("/{idCateg}/instrument/edit/{ID}/1")
+    public String editInstrument(@RequestParam(name = "file1",required = false) MultipartFile file1,
+                                 @RequestParam(name = "file2",required = false) MultipartFile file2,
+                                 @RequestParam(name = "file3",required = false) MultipartFile file3,
+                                 Instrument editedInst, Principal principal) throws IOException{
+        instService.saveInst(principal ,editedInst, file1, file2, file3);
+        return "redirect:/{idCateg}/instrument/{ID}";
+    }
+
 }
