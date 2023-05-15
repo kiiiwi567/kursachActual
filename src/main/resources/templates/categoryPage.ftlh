@@ -6,7 +6,7 @@
 <body>
 <h1><a href = "/"> mainFuckingPage </a></h1>
 <#if user.userEmail??>
-    <h3>Имя пользователя: ${user.username}, корзина: <a href="/bucket"> тык</a>
+    <h3>Имя пользователя: ${user.username}, корзина: <a href="/bucket"> тык </a>
     <form action = "/logout" method="post">
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="submit" value="Выйти"/>
@@ -54,10 +54,14 @@
         <th><a href = "/category/${idCateg}/instrument/${instrument.idInst}"> ${instrument.instName} </a></th>
         <th>${instrument.instPrice} BYN</th>
         <th>
-            <form action="/category/${idCateg}/${instrument.idInst}/bucket" method="get">
-                <input type ="submit" value="Добавить в корзину"/>
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
-            </form>
+            <#if user.userEmail??>
+                <form action="/category/${idCateg}/${instrument.idInst}/bucket" method="get">
+                    <input type ="submit" value="Добавить в корзину"/>
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                </form>
+            <#else>
+                Чтобы добавить товар в корзину - авторизуйтесь
+            </#if>
         </th>
     </tr>
     </#list>

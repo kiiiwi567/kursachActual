@@ -13,14 +13,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class BucketServiceImpl implements BucketService{
+public class BucketServiceImpl implements BucketService {
     private final BucketRepository bucketRepository;
     private final InstRepository instRepository;
     private final UserService userService;
 
     public BucketServiceImpl(BucketRepository bucketRepository, InstRepository instRepository, UserService userService) {
-        this.bucketRepository=bucketRepository;
-        this.instRepository=instRepository;
+        this.bucketRepository = bucketRepository;
+        this.instRepository = instRepository;
         this.userService = userService;
     }
 
@@ -44,7 +44,7 @@ public class BucketServiceImpl implements BucketService{
     @Override
     public void addInstruments(Bucket bucket, List<Long> idInstList) {
         List<Instrument> instruments = bucket.getInstruments();
-        List<Instrument> newInstList = instruments == null ? new ArrayList<>(): new ArrayList<>(instruments);
+        List<Instrument> newInstList = instruments == null ? new ArrayList<>() : new ArrayList<>(instruments);
         newInstList.addAll(getCollectRefInstrumentsByIds(idInstList));
         bucket.setInstruments(newInstList);
         bucketRepository.save(bucket);
@@ -61,7 +61,7 @@ public class BucketServiceImpl implements BucketService{
         Map<Long, BucketDetailDTO> mapByIdInst = new HashMap<>();
 
         List<Instrument> instruments = user.getBucket().getInstruments();
-        for (Instrument instrument : instruments){
+        for (Instrument instrument : instruments) {
             BucketDetailDTO detail = mapByIdInst.get(instrument.getIdInst());
             if (detail == null) {
                 mapByIdInst.put(instrument.getIdInst(), new BucketDetailDTO(instrument));
