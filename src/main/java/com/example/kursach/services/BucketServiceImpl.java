@@ -6,10 +6,7 @@ import com.example.kursach.repositories.InstRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,10 +39,15 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public void addInstruments(Bucket bucket, List<Long> idInstList) {
+    public void addOrRemoveInstruments(Bucket bucket, List<Long> idInstList, boolean add, Long idInstToRemove) {
         List<Instrument> instruments = bucket.getInstruments();
         List<Instrument> newInstList = instruments == null ? new ArrayList<>() : new ArrayList<>(instruments);
-        newInstList.addAll(getCollectRefInstrumentsByIds(idInstList));
+        if (add) {
+            newInstList.addAll(getCollectRefInstrumentsByIds(idInstList));
+        } else {
+            List<Long> removing = Arrays.asList(idInstToRemove);
+            newInstList.removeAll(getCollectRefInstrumentsByIds(removing));
+        }
         bucket.setInstruments(newInstList);
         bucketRepository.save(bucket);
     }

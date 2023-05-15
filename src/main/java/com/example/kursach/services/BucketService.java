@@ -9,7 +9,7 @@ import java.util.List;
 public interface BucketService {
     Bucket createBucket(User user, List<Long> idInstList);
 
-    void addInstruments(Bucket bucket, List<Long> idInstList);
+    void addOrRemoveInstruments(Bucket bucket, List<Long> idInstList, boolean add, Long idInstToRemove);
 
     BucketDTO getBucketByUserEmail(String userEmail);
 }

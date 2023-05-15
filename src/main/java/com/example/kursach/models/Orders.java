@@ -3,11 +3,13 @@ package com.example.kursach.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -17,6 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Orders {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "idOrder")
     private Long idOrder;
 
@@ -28,6 +31,7 @@ public class Orders {
     private LocalDateTime orderCrDate;
 
     @Column
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate orderDelivDate;
 
     @Column

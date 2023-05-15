@@ -94,7 +94,7 @@ public class InstService {
         return instRepository.findById(instId).orElse(null);
     }
 
-    public void addToUserBucket(Long idInst, String userEmail) {
+    public void addOrRemoveToUserBucket(Long idInst, String userEmail, boolean add, Long idInstToRemove) {
         User userNew = userService.findByUserEmail(userEmail);
         if (userNew == null) throw new RuntimeException("User not found - " + userEmail);
 
@@ -104,7 +104,11 @@ public class InstService {
             userNew.setBucket(newBucket);
             userRepository.save(userNew);
         } else {
-            bucketService.addInstruments(bucket, Collections.singletonList(idInst));
+            if (add) {
+                bucketService.addOrRemoveInstruments(bucket, Collections.singletonList(idInst), true, null);
+            } else {
+                bucketService.addOrRemoveInstruments(bucket, Collections.singletonList(idInst), false, idInstToRemove);
+            }
         }
     }
 }

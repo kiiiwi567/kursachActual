@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface InstRepository extends JpaRepository<Instrument, Long> {
     List<Instrument> findByInstName (String InstName);
+
+    List<Instrument> findByIdInstIn(List<Long> idInstList);
     Instrument findTopByOrderByIdInstDesc();
     List<Instrument> findAllByIdCateg(Long idCateg);
     List<Instrument> findAllByInstPriceBetweenAndIdCateg(Double minPrice, Double maxPrice, Long idCateg);

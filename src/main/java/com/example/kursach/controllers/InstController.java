@@ -54,7 +54,7 @@ public class InstController {
                                    @RequestParam(name = "file3",required = false) MultipartFile file3,
                                    Instrument newInst, Principal principal, boolean isEdit) throws IOException {
         isEdit=false;
-        instService.saveInst(principal ,newInst, file1, file2, file3, isEdit);
+        instService.saveInst(principal ,newInst, file1, file2, file3, false);
         return "redirect:/category/{idCateg}";
     }
 
@@ -91,7 +91,7 @@ public class InstController {
         if (principal==null) {
             return "redirect:/category/{idCateg}";
         }
-        instService.addToUserBucket(idInst, instService.getUserByPrincipal(principal).getUserEmail());
+        instService.addOrRemoveToUserBucket(idInst, instService.getUserByPrincipal(principal).getUserEmail(), true, null);
         return "redirect:/category/{idCateg}";
     }
 }
