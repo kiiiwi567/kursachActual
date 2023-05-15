@@ -85,4 +85,13 @@ public class InstController {
          instService.saveInst(principal ,editedInst, file1, file2, file3, isEdit);
          return "redirect:/category/{idCateg}/instrument/{ID}";
      }
+
+    @GetMapping("/{idInst}/bucket")
+    public String addBucket(@PathVariable("idInst") Long idInst, Principal principal, @PathVariable String idCateg) {
+        if (principal==null) {
+            return "redirect:/category/{idCateg}";
+        }
+        instService.addToUserBucket(idInst, instService.getUserByPrincipal(principal).getUserEmail());
+        return "redirect:/category/{idCateg}";
+    }
 }

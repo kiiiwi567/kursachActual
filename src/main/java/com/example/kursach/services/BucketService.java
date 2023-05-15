@@ -11,5 +11,5 @@ public interface BucketService {
 
     void addInstruments(Bucket bucket, List<Long> idInstList);
 
-    BucketDTO getBucketByUser(String name);
+    BucketDTO getBucketByUserEmail(String userEmail);
 }

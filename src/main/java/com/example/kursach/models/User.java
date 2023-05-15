@@ -4,6 +4,8 @@ package com.example.kursach.models;
 
 import com.example.kursach.models.enums.Role;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,7 +15,9 @@ import java.util.*;
 
 @Entity
 @Table(name = "users")
-@Data
+//@Data
+@Getter
+@Setter
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

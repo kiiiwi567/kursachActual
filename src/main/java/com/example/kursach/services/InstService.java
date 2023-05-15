@@ -93,19 +93,16 @@ public class InstService {
     public Instrument getInstByID(Long instId) {
         return instRepository.findById(instId).orElse(null);
     }
-    /*public List<Instrument> getAllInstById(List<Long> idInstList){
-        return instRepository.findAllById(idInstList);
-    }*/
 
-    public void addToUserBucket(Long idInst, String username) {
-        User user = userService.findByUserName(username);
-        if (user == null) throw new RuntimeException("User not found - " + username);
+    public void addToUserBucket(Long idInst, String userEmail) {
+        User userNew = userService.findByUserEmail(userEmail);
+        if (userNew == null) throw new RuntimeException("User not found - " + userEmail);
 
-        Bucket bucket = user.getBucket();
+        Bucket bucket = userNew.getBucket();
         if (bucket == null) {
-            Bucket newBucket = bucketService.createBucket(user, Collections.singletonList(idInst));
-            user.setBucket(newBucket);
-            userRepository.save(user);
+            Bucket newBucket = bucketService.createBucket(userNew, Collections.singletonList(idInst));
+            userNew.setBucket(newBucket);
+            userRepository.save(userNew);
         } else {
             bucketService.addInstruments(bucket, Collections.singletonList(idInst));
         }

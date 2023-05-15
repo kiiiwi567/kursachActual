@@ -6,6 +6,7 @@ import com.example.kursach.services.InstService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -23,18 +24,9 @@ public class BucketController {
             model.addAttribute("bucket", new BucketDTO());
         }
         else{
-            BucketDTO bucketDTO = bucketService.getBucketByUser(principal.getName());
+            BucketDTO bucketDTO = bucketService.getBucketByUserEmail(instService.getUserByPrincipal(principal).getUserEmail());
             model.addAttribute("bucket", bucketDTO);
         }
         return "bucketPage";
-    }
-
-    @GetMapping("/bucket/{idInst}")
-    public String addBucket(@PathVariable("idInst") Long idInst, Principal principal) {
-        if (principal==null) {
-            return "redirect:/";
-        }
-        instService.addToUserBucket(idInst, principal.getName());
-        return "redirect:/";
     }
 }

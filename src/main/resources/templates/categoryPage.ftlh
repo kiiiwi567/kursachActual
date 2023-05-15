@@ -6,7 +6,7 @@
 <body>
 <h1><a href = "/"> mainFuckingPage </a></h1>
 <#if user.userEmail??>
-    <h3>Имя пользователя: ${user.username}
+    <h3>Имя пользователя: ${user.username}, корзина: <a href="/bucket"> тык</a>
     <form action = "/logout" method="post">
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="submit" value="Выйти"/>
@@ -51,16 +51,17 @@
     </tr>
     <#list instrument as instrument>
     <tr>
-        <th><a href = "${idCateg}/instrument/${instrument.idInst}"> ${instrument.instName} </a></th>
+        <th><a href = "/category/${idCateg}/instrument/${instrument.idInst}"> ${instrument.instName} </a></th>
         <th>${instrument.instPrice} BYN</th>
         <th>
-            <form action="/bucket/${instrument.idInst}" method="post">
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <form action="/category/${idCateg}/${instrument.idInst}/bucket" method="get">
                 <input type ="submit" value="Добавить в корзину"/>
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
             </form>
         </th>
     </tr>
     </#list>
+</table>
 
 <#if user.isAdmin()>
     <hr>
