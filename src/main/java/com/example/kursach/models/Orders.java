@@ -40,6 +40,9 @@ public class Orders {
     @Column
     private String orderType;
 
+    @Column
+    private String orderStatus;
+
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true)
