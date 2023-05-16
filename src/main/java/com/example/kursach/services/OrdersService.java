@@ -1,10 +1,12 @@
 package com.example.kursach.services;
 
+import com.example.kursach.components.HibernateCacheHelper;
 import com.example.kursach.models.*;
 import com.example.kursach.repositories.InstRepository;
 import com.example.kursach.repositories.OrdersRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -19,6 +21,9 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class OrdersService {
+    /*@Autowired
+    private HibernateCacheHelper hibernateCacheHelper;*/
+
 
     private final InstRepository instRepository;
     private final OrdersRepository ordersRepository;
@@ -82,7 +87,7 @@ public class OrdersService {
         );
         query.setParameter("orderId", orderId);
         List<String> instrumentNames = query.getResultList();
-
+        /*hibernateCacheHelper.clearMetadataCache();*/
         return instrumentNames;
     }
 

@@ -53,7 +53,6 @@
         <th>Инструменты</th>
         <th>Статус</th>
     </tr>
-    <#list users as user>
         <#list orderDetails as orderDetail>
             <tr>
                 <td>${orderDetail.userEmail}</td>
@@ -72,9 +71,6 @@
                 </td>
             </tr>
         </#list>
-    <#else>
-        <h3>Пользователей нет</h3>
-    </#list>
 </table>
 </body>
 </html>
