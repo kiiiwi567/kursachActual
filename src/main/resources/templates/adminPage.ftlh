@@ -84,10 +84,14 @@
     </form>
     <br>
 
-    <form action="/import/json" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".json">
-        <button type="submit" name="status" value="Импорт из JSON">Импорт из JSON</button>
+
+    <button type="submit" name="status" value="Импорт из JSON">Импорт из JSON</button>
+    <br>
+
+    <form action="/wordreport" method="POST">
+        <button type="submit" name="status" value="Отчёт Word">Отчёт Word</button>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
     </form>
+    <br>
 
 </@t.template>

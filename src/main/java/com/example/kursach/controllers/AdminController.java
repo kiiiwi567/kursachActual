@@ -3,6 +3,7 @@ package com.example.kursach.controllers;
 import com.example.kursach.models.OrderDetail;
 import com.example.kursach.models.Orders;
 import com.example.kursach.models.User;
+import com.example.kursach.models.WordReportGenerator;
 import com.example.kursach.models.enums.Role;
 import com.example.kursach.services.InstService;
 import com.example.kursach.services.OrdersService;
@@ -73,6 +74,13 @@ public class AdminController {
     @PostMapping("/admin/user/edit")
     public String userEdit(@RequestParam("idUser") User user, @RequestParam Map<String, String> form) {
         userService.changeUserRoles(user, form);
+        return "redirect:/adminPage";
+    }
+
+    @PostMapping("/wordreport")
+    public String wordReport() {
+        List<OrderDetail> orderDetails = ordersService.listAllDetailedOrders();
+        WordReportGenerator.generateReport(orderDetails);
         return "redirect:/adminPage";
     }
 }
