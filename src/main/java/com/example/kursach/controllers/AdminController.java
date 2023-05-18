@@ -34,6 +34,7 @@ public class AdminController {
         model.addAttribute("userPr", instService.getUserByPrincipal(principal));
         model.addAttribute("orderDetails", orderDetails);
         model.addAttribute("users", userService.listAllUsers());
+        model.addAttribute("roles", Role.values());
         return "adminPage";
     }
 

@@ -53,17 +53,17 @@ public class UserService {
     }
 
     public void changeUserRoles(User user, Map<String, String> form) {
-        Set<String> roles = Arrays.stream(Role.values())
-                .map(Role::name)
-                .collect(Collectors.toSet());
-        user.getRoles().clear();
-        for (String key : form.keySet()) {
-            if (roles.contains(key)) {
-                user.getRoles().add(Role.valueOf(key));
-            }
+        if (user.isAdmin()) {
+            user.getRoles().clear();
+
+            user.getRoles().add(Role.ROLE_CLIENT);
         }
+            else{
+                user.getRoles().clear();
+            user.getRoles().add(Role.ROLE_ADMIN);
+            }
         userRepository.save(user);
-    }
+        }
 
     public User findByUserEmail(String userEmail) {
         return userRepository.findByUserEmail(userEmail);

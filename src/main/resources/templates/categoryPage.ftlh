@@ -4,24 +4,31 @@
     <h4 xmlns="http://www.w3.org/1999/html">${category.categName}</h4>
     <form action="/category/${category.idCateg}" method="get">
         Поиск: <input type="text" name="instName">
+        <input type="submit" value="Поиск"/>
         <br>
+    </form>
+    <form action="/category/${category.idCateg}" method="get">
         <p>Фильтровать по цене</p>
-        <br>
         От:
         <div class="slidecontainer">
-             <input type="range" name="minPrice" id="minPrice" min="1" max="10000" oninput="minPriceOut.value = minPrice.value">
-        </div> <output id="minPriceOut">0</output>
+            <input type="range" class="slider" name="minPrice" id="minPrice" min="1" max="10000"
+                   oninput="minPriceOut.value = minPrice.value">
+        </div>
+        <output id="minPriceOut">0</output>
+        <br>
         До:
         <div class="slidecontainer">
-            <input type="range" name="maxPrice" id="maxPrice" min="1" max="10000" oninput="maxPriceOut.value = maxPrice.value">
-        </div> <output id="maxPriceOut">0</output>
+            <input type="range" class="slider" name="maxPrice" id="maxPrice" min="1" max="10000"
+                   oninput="maxPriceOut.value = maxPrice.value">
+        </div>
+        <output id="maxPriceOut">0</output>
         <br>
         <p>Сортировать по:</p>
         <div>
             <label><input type="checkbox" name="sortByName"> Названию</label>
             <label><input type="checkbox" name="sortByPrice"> Цене</label>
         </div>
-        <input type="submit" value="Поиск"/>
+        <input type="submit" value="Сортировать/фильтровать"/>
     </form>
 
 <#--<#list instrument as instrument>
@@ -50,29 +57,29 @@
 </div>-->
 
 
-    <#--<#list instrument as instrument>
-        <div class="row row-cols-3 row-cols-md-3 g-4">
-        <div class="card text-white bg-dark my-3 product">
-        <a href="/category/${idCateg}/instrument/${instrument.idInst}" class="product-link">
-            <img class="card-img-top" src="/images/${instrument.previewImageId}">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">${instrument.instName}</h5>
-            <p class="card-text">${instrument.instPrice} BYN</p>
-            <#if userPr.userEmail??>
-                <form action="/category/${idCateg}/${instrument.idInst}/bucket" method="get">
-                    <button type="submit" class="btn btn-outline-warning">Добавить в корзину</button>
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                </form>
-            <#else>
-                <p>Чтобы добавить товар в корзину - авторизуйтесь</p>
-            </#if>
-        </div>
-    <#else>
-        <h1 style="text-align: center">Не найдено</h1>
-        </div>
-        </div>
-    </#list>-->
+<#--<#list instrument as instrument>
+    <div class="row row-cols-3 row-cols-md-3 g-4">
+    <div class="card text-white bg-dark my-3 product">
+    <a href="/category/${idCateg}/instrument/${instrument.idInst}" class="product-link">
+        <img class="card-img-top" src="/images/${instrument.previewImageId}">
+    </a>
+    <div class="card-body">
+        <h5 class="card-title">${instrument.instName}</h5>
+        <p class="card-text">${instrument.instPrice} BYN</p>
+        <#if userPr.userEmail??>
+            <form action="/category/${idCateg}/${instrument.idInst}/bucket" method="get">
+                <button type="submit" class="btn btn-outline-warning">Добавить в корзину</button>
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+            </form>
+        <#else>
+            <p>Чтобы добавить товар в корзину - авторизуйтесь</p>
+        </#if>
+    </div>
+<#else>
+    <h1 style="text-align: center">Не найдено</h1>
+    </div>
+    </div>
+</#list>-->
 
     <div class="card-columns">
         <#list instrument as instrument>
