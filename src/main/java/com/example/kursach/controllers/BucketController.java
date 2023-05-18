@@ -28,7 +28,7 @@ public class BucketController {
         else{
             BucketDTO bucketDTO = bucketService.getBucketByUserEmail(instService.getUserByPrincipal(principal).getUserEmail());
             model.addAttribute("bucket", bucketDTO);
-            model.addAttribute("user", instService.getUserByPrincipal(principal));
+            model.addAttribute("userPr", instService.getUserByPrincipal(principal));
         }
         return "bucketPage";
     }

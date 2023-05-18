@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>adminPage</title>
-</head>
-<body>
-<h1><a href = "/"> mainFuckingPage </a></h1>
+<#import "TEMPLATE.ftlh" as t>
+<@t.template userPr>
 <hr>
 <h2>Панель администратора</h2>
 <h3>Информация о пользователях</h3>
@@ -72,5 +67,5 @@
             </tr>
         </#list>
 </table>
-</body>
-</html>
+
+</@t.template>

@@ -34,7 +34,7 @@ public class OrderController {
     public String orderingInProgress(Principal principal, Model model) {
         BucketDTO bucketDTO = bucketService.getBucketByUserEmail(instService.getUserByPrincipal(principal).getUserEmail());
         model.addAttribute("bucket", bucketDTO);
-        model.addAttribute("user", instService.getUserByPrincipal(principal));
+        model.addAttribute("userPr", instService.getUserByPrincipal(principal));
         return "orderingPage";
     }
 
@@ -47,7 +47,7 @@ public class OrderController {
 
         User user = instService.getUserByPrincipal(principal);
         BucketDTO bucketDTO = bucketService.getBucketByUserEmail(user.getUserEmail());
-        model.addAttribute("user", user);
+        model.addAttribute("userPr", user);
         ordersService.addOrder(bucketDTO, delivDate, orderType, user);
         return "orderCompletePage";
     }

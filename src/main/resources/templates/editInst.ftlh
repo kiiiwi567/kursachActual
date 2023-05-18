@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title> editInstPage </title>
-</head>
-<body>
-<h1><a href = "/"> mainFuckingPage </a></h1>
-        <hr>
+<#import "TEMPLATE.ftlh" as t>
+<@t.template userPr>
         <h3>Редактировать товар ${instrument.instName}</h3>
         <form action="/category/${idCateg}/instrument/edit/${instrument.idInst}/1" method="post" enctype="multipart/form-data">
             Название: ${instrument.instName} <input type="text" name="instName" value="${instrument.instName}"/><br><br>
@@ -22,5 +16,4 @@
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <input type ="submit" value="Редактировать товар"/>
         </form>
-</body>
-</html>
+</@t.template>

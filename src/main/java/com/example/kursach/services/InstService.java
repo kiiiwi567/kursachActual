@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -69,6 +70,8 @@ public class InstService {
         Instrument instFromDb = instRepository.save(newInst);
         if ((file1.getSize() != 0) | (file2.getSize() != 0) | (file3.getSize() != 0))
             instFromDb.setPreviewImageId(instFromDb.getImages().get(0).getIdImg());
+        instFromDb.setDateOfCreated(LocalDateTime.now());
+        instRepository.save(instFromDb);
     }
 
     public User getUserByPrincipal(Principal principal) {

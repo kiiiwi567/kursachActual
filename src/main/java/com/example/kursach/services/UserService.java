@@ -43,10 +43,10 @@ public class UserService {
         if (user != null) {
             if (user.isActive()){
                 user.setActive(false);
-                log.info("Banned user with id={}, email={}", user.getIdUser(), user.getUserEmail());
+                log.info("Banned user with id={}, email={}", user.getIdUser(), user.getUsername());
             } else {
                 user.setActive(true);
-                log.info("Unbanned user with id={}, email={}", user.getIdUser(), user.getUserEmail());
+                log.info("Unbanned user with id={}, email={}", user.getIdUser(), user.getUsername());
             }
         }
         userRepository.save(user);

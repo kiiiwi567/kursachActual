@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>loginPage</title>
-</head>
-<body>
-<h1><a href = "/"> mainFuckingPage </a></h1><hr>
+<#import "TEMPLATE.ftlh" as t>
+<@t.template userPr>
 <h4>Авторизация</h4>
 <form action="/login" method="post">
     Эл. почта: <input type="email" name="username" required><br><br>
@@ -13,5 +8,4 @@
     <input type="submit" value="Вход"/>
 </form>
 <p>Нет аккаунта? <a href="/registration">Зарегистрируйся!</a>
-</body>
-</html>
+</@t.template>

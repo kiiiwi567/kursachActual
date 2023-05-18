@@ -4,6 +4,7 @@ import com.example.kursach.models.OrderDetail;
 import com.example.kursach.models.Orders;
 import com.example.kursach.models.User;
 import com.example.kursach.models.enums.Role;
+import com.example.kursach.services.InstService;
 import com.example.kursach.services.OrdersService;
 import com.example.kursach.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +26,12 @@ import java.util.Map;
 public class AdminController {
     private final UserService userService;
     private final OrdersService ordersService;
+    private final InstService instService;
 
     @GetMapping("/adminPage")
-    public String admin(Model model){
+    public String admin(Model model, Principal principal){
         List<OrderDetail> orderDetails = ordersService.listAllDetailedOrders();
+        model.addAttribute("userPr", instService.getUserByPrincipal(principal));
         model.addAttribute("orderDetails", orderDetails);
         model.addAttribute("users", userService.listAllUsers());
         return "adminPage";
@@ -58,8 +62,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin/user/edit/{user}")
-    public String userEdit(@PathVariable("user") User user, Model model) {
+    public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
+        model.addAttribute("userPr", instService.getUserByPrincipal(principal));
         model.addAttribute("roles", Role.values());
         return "editUser";
     }

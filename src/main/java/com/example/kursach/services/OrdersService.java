@@ -57,7 +57,7 @@ public class OrdersService {
 
     private OrderDetail mapToOrderDetail(Orders order) {
         Long idOrder = order.getIdOrder();
-        String userEmail = order.getUser().getUserEmail();
+        String userEmail = order.getUser().getUsername();
         String userPhone = order.getUser().getUserPhone();
         LocalDate orderCrDate = LocalDate.from(order.getOrderCrDate());
         LocalDate orderDelivDate = order.getOrderDelivDate();

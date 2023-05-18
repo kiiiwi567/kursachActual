@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Registration</title>
-</head>
-<body>
-<h1><a href = "/"> mainFuckingPage </a></h1><hr>
+<#import "TEMPLATE.ftlh" as t>
+<@t.template userPr>
 <h4>Регистрация</h4>
 <form action="/registration" method="post">
   Имя пользователя: <input type="text" name="userName" required><br><br>
@@ -17,5 +12,5 @@
 <#if errorMessage??>
   <h2 style ="color: red"> ${errorMessage}</h2>
 </#if>
-</body>
-</html>
+<#import "TEMPLATE.ftlh" as t>
+</@t.template>

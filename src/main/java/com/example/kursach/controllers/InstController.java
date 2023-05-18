@@ -34,7 +34,7 @@ public class InstController {
     {
         model.addAttribute("instrument", instService.listReturn(instName, idCateg, minPrice, maxPrice, sortByName, sortByPrice));
         model.addAttribute("category", categService.getCategById(idCateg));
-        model.addAttribute("user", instService.getUserByPrincipal(principal));
+        model.addAttribute("userPr", instService.getUserByPrincipal(principal));
         return "categoryPage";
     }
 
@@ -44,7 +44,7 @@ public class InstController {
         model.addAttribute("idCateg", idCateg);
         model.addAttribute("instrument", instService.getInstByID(ID));
         model.addAttribute("images", instService.getInstByID(ID).getImages());
-        model.addAttribute("user", instService.getUserByPrincipal(principal));
+        model.addAttribute("userPr", instService.getUserByPrincipal(principal));
         return "instInfo";
     }
 
@@ -71,7 +71,7 @@ public class InstController {
          model.addAttribute("idCateg", idCateg);
          model.addAttribute("instrument", instService.getInstByID(ID));
          model.addAttribute("images", instService.getInstByID(ID).getImages());
-         model.addAttribute("user", instService.getUserByPrincipal(principal));
+         model.addAttribute("userPr", instService.getUserByPrincipal(principal));
          return "editInst";
      }
      @PostMapping("/instrument/edit/{ID}/1")

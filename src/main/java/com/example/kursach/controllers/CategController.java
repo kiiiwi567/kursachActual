@@ -18,7 +18,7 @@ public class CategController {
     public String mainPage (Principal principal, Model model)
     {
         model.addAttribute("category", categService.listReturn());
-        model.addAttribute("user", instService.getUserByPrincipal(principal));
+        model.addAttribute("userPr", instService.getUserByPrincipal(principal));
         return "mainPage";
     }
 }
