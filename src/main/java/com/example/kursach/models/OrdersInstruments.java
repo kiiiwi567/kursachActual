@@ -1,5 +1,6 @@
 package com.example.kursach.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ public class OrdersInstruments {
 
     @ManyToOne
     @JoinColumn(name = "orders_id_order")
+    @JsonIgnore
     private Orders orders;
 
     @ManyToOne

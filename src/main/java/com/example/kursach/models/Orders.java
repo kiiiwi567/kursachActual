@@ -1,5 +1,6 @@
 package com.example.kursach.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class Orders {
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn (name = "idUser")
+    @JsonIgnore
     private User user;
 
     @Column
@@ -46,5 +48,6 @@ public class Orders {
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true)
+    @JsonIgnore
     private Set<Instrument> instruments=new HashSet<>();
 }

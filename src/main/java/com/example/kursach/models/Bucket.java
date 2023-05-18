@@ -1,5 +1,6 @@
 package com.example.kursach.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,11 +28,13 @@ public class Bucket {
 
     @OneToOne
     @JoinColumn(name = "idUser")
+    @JsonIgnore
     private User user;
 
     @ManyToMany
     @JoinTable(name = "buckets_instruments",
                 joinColumns = @JoinColumn(name = "idBucket"),
                 inverseJoinColumns = @JoinColumn(name = "idInst"))
+    @JsonIgnore
     private List<Instrument> instruments;
 }

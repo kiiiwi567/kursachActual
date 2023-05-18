@@ -78,4 +78,16 @@
         </#list>
     </table>
 
+    <form action="/export/json" method="POST">
+        <button type="submit" name="status" value="Экспорт в JSON">Экспорт в JSON</button>
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+    </form>
+    <br>
+
+    <form action="/import/json" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".json">
+        <button type="submit" name="status" value="Импорт из JSON">Импорт из JSON</button>
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+    </form>
+
 </@t.template>

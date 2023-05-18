@@ -1,6 +1,8 @@
 package com.example.kursach.models;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -38,11 +40,13 @@ public class Instrument {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY/*, mappedBy = "instrument"*/)
     @JoinColumn (name = "idInst", referencedColumnName = "idInst")
+    @JsonIgnore
     private List<Image> images = new ArrayList<>();
     private Long previewImageId;
 
     @ManyToOne (cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn (name = "idUser")
+    @JsonIgnore
     private User user;
     private LocalDateTime dateOfCreated;
 

@@ -3,6 +3,7 @@ package com.example.kursach.models;
 //import com.example.kursach.models.enums.Role;
 
 import com.example.kursach.models.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,20 +42,24 @@ public class User implements UserDetails {
 
     @OneToOne//(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "idImg")
+    @JsonIgnore
     private Image avatar;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
             joinColumns = @JoinColumn(name = "id_user"))
     @Enumerated(EnumType.STRING)
+    @JsonIgnore
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonIgnore
     private List<Instrument> instruments = new ArrayList<>();
 
     private LocalDateTime dateOfCreated;
 
     @OneToOne(cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private Bucket bucket;
 
     @PrePersist

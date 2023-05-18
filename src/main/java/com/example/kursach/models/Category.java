@@ -1,6 +1,8 @@
 package com.example.kursach.models;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,5 +23,6 @@ public class Category {
     private String categName;
     @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn (name = "idCateg", referencedColumnName = "idCateg")
+    @JsonIgnore
     private List<Instrument> instruments = new ArrayList<>();
 }
