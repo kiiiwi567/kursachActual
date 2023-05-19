@@ -1,97 +1,130 @@
 <#import "TEMPLATE.ftlh" as t>
 <@t.template userPr>
-    <hr>
-    <h2>Панель администратора</h2>
-    <h3>Информация о пользователях</h3>
-    <table border="1">
-        <tr>
-            <th>Имя</th>
-            <th>Email</th>
-            <th>Номер телефона</th>
-            <th>Активность</th>
-            <th>Роли</th>
-            <th>Бан</th>
-            <th>Редактирование</th>
-            <th>Подробная информация</th>
-        </tr>
-        <#list users as user>
-            <tr>
-                <th>${user.userNickname}</th>
-                <th>${user.userEmail}</th>
-                <th>${user.userPhone}</th>
-                <th><#if user.active>true<#else>false</#if></th>
-                <th><#if user.isAdmin()>Админ<#else>Клиент</#if></th>
-                <th>
-                    <#if user.idUser != 1>
-                        <form action="/admin/user/ban/${user.idUser}" method="post">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
-                            <input type="submit" value="Бан">
-                        </form>
-                    </#if>
-                </th>
-                <th>
-                    <#if user.idUser != 1>
-                    <form action=/admin/user/edit method="post">
-                        <input type="hidden" name="idUser" value="${user.idUser}">
-                        <button type="submit" name="userRole" value="Редактировние">Редактирование</button>
-                        <input type="hidden" name="_csrf" value="${_csrf.token}">
-                    </form>
-                    </#if>
-                </th>
-                <th><a href="/user/${user.idUser}">Подробная информация</a></th>
-            </tr>
-        <#else>
-            <h3>Пользователей нет</h3>
-        </#list>
-    </table>
-    <br>
-    <br>
-    <h3>Информация о заказах</h3>
-    <table border="1">
-        <tr>
-            <th>Email</th>
-            <th>Номер телефона</th>
-            <th>Дата заказа</th>
-            <th>Дата доставки</th>
-            <th>Сумма заказа</th>
-            <th>Тип доставки</th>
-            <th>Инструменты</th>
-            <th>Статус</th>
-        </tr>
-        <#list orderDetails as orderDetail>
-            <tr>
-                <td>${orderDetail.userEmail}</td>
-                <td>${orderDetail.userPhone}</td>
-                <td>${orderDetail.orderCrDate}</td>
-                <td>${orderDetail.orderDelivDate}</td>
-                <td>${orderDetail.orderSum}</td>
-                <td>${orderDetail.orderType}</td>
-                <td>${orderDetail.orderInstList?join(", ")}</td>
-                <td>
-                    <form action="/updateOrderStatus" method="POST">
-                        <input type="hidden" name="orderId" value="${orderDetail.idOrder}">
-                        <button type="submit" name="status" value="${orderDetail.status}">${orderDetail.status}</button>
-                        <input type="hidden" name="_csrf" value="${_csrf.token}">
-                    </form>
-                </td>
-            </tr>
-        </#list>
-    </table>
+    <section id="services" style="color: var(--bs-black);">
+        <div class="container" style="margin-top: 36px;margin-bottom: 44px;"><h1 style="margin-bottom: 16px;">Список
+                пользователей</h1>
+            <div class="table-responsive text-center">
+                <table class="table">
+                    <thead style="font-size: 20px;">
+                    <tr>
+                        <th>Имя</th>
+                        <th>Email</th>
+                        <th>Номер телефона</th>
+                        <th>Активность</th>
+                        <th>Роли</th>
+                        <th>Бан</th>
+                        <th>Изменить роль</th>
+                        <th>Ссылка на профиль</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#list users as user>
+                        <tr>
+                            <td>${user.userNickname}</td>
+                            <td>${user.userEmail}</td>
+                            <td>${user.userPhone}</td>
+                            <td><#if user.active>true<#else>false</#if></td>
+                            <td><#if user.isAdmin()>Админ<#else>Клиент</#if></td>
+                            <td>
+                                <#if user.idUser != 1>
+                                    <form action="/admin/user/ban/${user.idUser}" method="post">
+                                        <button class="btn btn-primary" type="submit"
+                                                style="color: var(--bs-btn-color);">
+                                            Бан
+                                        </button>
+                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                    </form>
+                                </#if>
+                            </td>
+                            <td>
+                                <#if user.idUser != 1>
+                                    <form action=/admin/user/edit method="post">
+                                        <input type="hidden" name="idUser" value="${user.idUser}">
+                                        <button class="btn btn-primary" type="submit"
+                                                style="color: var(--bs-btn-color);padding-right: 39px;padding-left: 40px;">
+                                            Изменить
+                                        </button>
+                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                    </form>
+                                </#if>
+                            </td>
+                            <td>
+                                <form action=/user/${user.idUser} method="get">
+                                    <button class="btn btn-primary" type="submit"
+                                            style="color: var(--bs-btn-color);padding-left: 71px;padding-right: 77px;">
+                                        Ссылка
+                                    </button>
+                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                </form>
+                            </td>
+                        </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container" style="margin-bottom: 104px;"><h1 style="margin-bottom: 16px;">Список заказов</h1>
+            <div class="table-responsive text-center" style="margin-bottom: 28px;">
+                <table class="table">
+                    <thead style="font-size: 20px;">
 
-    <form action="/export/json" method="POST">
-        <button type="submit" name="status" value="Экспорт в JSON">Экспорт в JSON</button>
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-    </form>
-    <br>
-
-
-    <button type="submit" name="status" value="Импорт из JSON">Импорт из JSON</button>
-    <br>
-
-    <form action="/wordreport" method="POST">
-        <button type="submit" name="status" value="Отчёт Word">Отчёт Word</button>
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-    </form>
-    <br>
-
+                    <tr>
+                        <th>Email</th>
+                        <th>Номер телефона</th>
+                        <th>Дата заказа</th>
+                        <th>Дата доставки</th>
+                        <th>Сумма заказа</th>
+                        <th>Тип доставки</th>
+                        <th>Инструменты</th>
+                        <th>Статус</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#list orderDetails as orderDetail>
+                        <tr>
+                            <td>${orderDetail.userEmail}</td>
+                            <td>${orderDetail.userPhone}</td>
+                            <td>${orderDetail.orderCrDate}</td>
+                            <td>${orderDetail.orderDelivDate}</td>
+                            <td>${orderDetail.orderSum}</td>
+                            <td>${orderDetail.orderType}</td>
+                            <td>${orderDetail.orderInstList?join(", ")}</td>
+                            <td>
+                                <form action="/updateOrderStatus" method="POST">
+                                    <input type="hidden" name="orderId" value="${orderDetail.idOrder}">
+                                    <button class="btn btn-primary" type="submit"
+                                            style="color: var(--bs-btn-color);" name="status" value="${orderDetail.status}">${orderDetail.status}
+                                    </button>
+                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                </form>
+                            </td>
+                        </tr>
+                    </#list>
+                    <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container" style="margin-bottom: 162px;">
+            <form action="/export/json" method="POST">
+                <button class="btn btn-primary" type="submit"
+                        style="padding-right: 108px;margin-right: 70px;color: var(--bs-btn-color);">Экспорт в JSON
+                </button>
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+            </form>
+            <br>
+            <#--<form>
+                <button class="btn btn-primary" type="button"
+                        style="padding-right: 108px;margin-right: 90px;color: var(--bs-btn-color);">Импорт в JSON
+                </button>
+            </form>
+            <br>-->
+            <form action="/wordreport" method="POST">
+                <button class="btn btn-primary" type="submit"
+                        style="padding-right: 108px;margin-right: 70px;color: var(--bs-black);">Отчёт Word
+                </button>
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+            </form>
+        </div>
+    </section>
 </@t.template>

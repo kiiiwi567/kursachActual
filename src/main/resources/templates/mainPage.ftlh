@@ -1,67 +1,57 @@
 <#import "TEMPLATE.ftlh" as t>
 <@t.template userPr>
+    <header class="masthead"
+            style="background: url(static/img/header_mainPage.jpg);background-size: cover;filter: brightness(96%);margin-bottom: 0px;">
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in"><span
+                            style="text-shadow: 0px 0px 10px var(--bs-gray-dark);filter: brightness(101%);">Даже соседи захотят</span>
+                </div>
+                <div class="intro-heading text-uppercase"><span style="text-shadow: 0px 0px 20px var(--bs-gray-700);">Чтобы ты играл громче!</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="services" style="padding-top: 68px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center"><h2 class="text-uppercase section-heading">Категории</h2>
+                    <h3 class="text-muted section-subheading">доступные в нашем магазине</h3></div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4"><a href="/category/1"><span class="fa-stack fa-4x"><img
+                                    src="../static/img/clients/guitarIcon.png"
+                                    style="margin-right: 0px;width: 100px;height: 100px;background: var(--bs-primary);"
+                                    width="140" height="135"></span></a><h4
+                                class="section-heading" style="margin-top: 5px;">Гитары</h4>
+                        <p class="text-muted" style="margin-bottom: 0px;"><br><span style="color: rgb(30, 30, 30);">Без преувеличения можно сказать, что гитара является одним из самых популярных инструментов в мире</span><br><br>
+                        </p></div>
+                <div class="col-md-4"><a href="/category/2"><span class="fa-stack fa-4x"><img
+                                    src="../static/img/clients/drumsIcon.png"
+                                    style="width: 100px;background: var(--bs-primary);"></span></a>
+                        <h4 class="section-heading" style="margin-top: 5px;">Ударные</h4>
+                        <p class="text-muted"><br><span style="color: rgb(30, 30, 30);">Ударные инструменты являются основой в различных стилях современной музыки. Именно грув, который они создают, заставляет слушателей двигаться в такт</span><br><br>
+                        </p></div>
+                <div class="col-md-4"><a href="/category/3"><span class="fa-stack fa-4x"><img
+                                    src="../static/img/clients/violaIcon.png"
+                                    style="width: 100px;background: var(--bs-primary);"></span></a>
+                        <h4 class="section-heading" style="margin-top: 5px;">Струнные</h4>
+                        <p class="text-muted"><br><span style="color: rgb(30, 30, 30);">Принято считать, что их непосредственным предком является виола – итальянский инструмент, появившийся в XV веке</span><br><br>
+                        </p></div>
+                <div class="col-md-4"><a href="/category/4"><span class="fa-stack fa-4x"><img
+                                    src="../static/img/clients/saxIcon.png" width="100"
+                                    height="100" style="background: var(--bs-primary);"></span></a>
+                    <h4 class="section-heading" style="margin-top: 5px;">Духовые</h4>
+                    <p class="text-muted"><br><span style="color: rgb(30, 30, 30);">По своей конструкции большинство из них являются трубками различных форм и устройств. Инструменты духовой группы обладают различными тембрами и заполняют по своим диапазонам все регистры</span>
+                    </p></div>
+                <div class="col-md-4"><a href="/category/5"><span class="fa-stack fa-4x"><img
+                                    src="../static/img/clients/pianoIcon.png"
+                                    style="width: 100px;background: var(--bs-primary);"></span></a>
+                        <h4 class="section-heading" style="margin-top: 5px;">Клавишные</h4>
+                        <p class="text-muted"><br><span style="color: rgb(30, 30, 30);">Различные клавишные инструменты объединяет одно - способ получения звука путем нажатия на клавиши, которые в свою очередь приводят в действие ту или иную систему звукообразования внутри инструмента</span><br><br>
+                        </p></div>
 
-    <img src="/static/staticImages/1.jpg" class="img-fluid">
-    <br>
-    <h2>Категории</h2>
-    <br>
-
-    <div class="row">
-    <div class="col text-center">
-        <a href="/category/1">
-            <img
-                    src="/static/staticImages/guitarIcon.png"
-                    class="img-fluid"
-            />
-        </a>
-        <p><b>Гитары</b></p>
-    </div>
-
-
-    <div class="col text-center">
-        <a href="/category/2">
-            <img
-                    src="/static/staticImages/drumsIcon.png"
-                    class="img-fluid"
-            />
-        </a>
-        <p><b>Ударные</b></p>
-    </div>
-
-    <div class="col text-center ">
-        <a href="/category/3">
-            <img
-                    src="/static/staticImages/violaIcon.png"
-                    class="img-fluid"
-            />
-        </a>
-        <p><b>Струнные</b></p>
-    </div>
-
-    <div class="col text-center">
-        <a href="/category/4">
-            <img
-                    src="/static/staticImages/saxIcon.png"
-                    class="w-100 shadow-1-strong"
-            />
-        </a>
-        <p><b>Духовые</b></p>
-    </div>
-
-    <div class="col text-center">
-        <a href="/category/5">
-            <img
-                    src="/static/staticImages/pianoIcon.png"
-                    class="w-100 shadow-1-strong"
-            />
-        </a>
-        <p><b>Клавишные</b></p>
-    </div>
-
-
-<#--<#list category as category>
-    <div>
-        <p><b><a href="/category/${category.idCateg}"> ${category.categName} </a></b></p>
-    </div>
-</#list>-->
+            </div>
+        </div>
+    </section>
 </@t.template>

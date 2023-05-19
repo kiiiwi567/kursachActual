@@ -1,66 +1,59 @@
 <#macro template userPr>
-    <!doctype html>
-    <html lang="ru">
+    <!DOCTYPE html>
+    <html lang="en">
     <head>
-        <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="/static/css/style.css">
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-              integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
-              crossorigin="anonymous">
-
-
-
-        <title>VolumeUp!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Home - Brand</title>
+        <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/css/styles.min.css">
     </head>
-    <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-
-            <a href="/">
-                <img src="/static/staticImages/mainLogo.png" width="32" height="32" class="rounded-circle">
-                <span class="navbar-brand mb-0 h1">VolumeUp!</span>
-            </a>
-
+    <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="54">
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/"
+               style="font-family: Anton, sans-serif;">&nbsp;<img
+                        src="../static/img/mainLogo.png"
+                        style="width: 50px;padding-top: 0px;padding-bottom: 0px;margin-bottom: 9px;">&nbsp;VolumeUp!</a>
             <#if userPr.userEmail??>
                 <#if userPr.isAdmin()>
-
-                    <button class="btn btn-light my-2 my-sm-0" type="button"
-                            onclick="window.location.href = '/adminPage'">
-                        Панель администратора
+                    <button class="btn btn-primary" type="button" style="color: var(--bs-black);"
+                            onclick="window.location.href = '/adminPage'">Панель администратора
                     </button>
-
                 </#if>
-                <div class="dropdown text-end">
-                    <a href="/user/profile">
-                        <img src="/static/staticImages/userIcon.png"
-                             width="32" height="32" class="rounded-circle">
-                    </a>
-                </div>
+                <a href="/bucket">
+                    <img src="../static/img/cartIcon.png"
+                         width="32" height="32" class="rounded">
+                </a>
+                <a href="/user/profile">
+                    <img src="../static/img/userIcon.png"
+                         width="32" height="32" class="rounded-circle">
+                </a>
             <#else>
-                <button class="btn btn-light my-2 my-sm-0" type="button"
-                        onclick="window.location.href = '/login'">
-                    Войти
+                <button class="btn btn-primary" type="button" style="color: var(--bs-btn-disabled-color); "
+                        onclick="window.location.href = '/login'">Войти
                 </button>
             </#if>
         </div>
     </nav>
-    <div class="container mt-4">
-        <#nested/>
-    </div>
-
-    <#--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-            crossorigin="anonymous"></script>-->
+    <#nested/>
+    <footer class="text-center" style="color: var(--bs-gray-300);background: var(--bs-gray-dark);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"><span class="copyright">Интернет-магазин VolumeUp!</span></div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item"></li>
+                        <li class="list-inline-item"></li>
+                        <li class="list-inline-item"></li>
+                    </ul>
+                </div>
+                <div class="col-md-4"><span class="copyright">Разработка: Михновец А.Ю.</span></div>
+            </div>
+        </div>
+    </footer>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/js/script.min.js"></script>
     </body>
     </html>
 </#macro>
