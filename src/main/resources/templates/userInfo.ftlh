@@ -7,7 +7,7 @@
          style="border:2px solid black; border-radius: 20px" height="120">
     <br>
     <br>
-    <h2>${user.userNickname}</h2>
+    <h2>${user.user}</h2>
     <br>
     Номер телефона: <b>${user.userPhone}</b>
     Email: </b> ${user.userEmail}<b

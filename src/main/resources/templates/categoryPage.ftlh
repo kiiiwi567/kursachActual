@@ -31,56 +31,6 @@
         <input type="submit" value="Сортировать/фильтровать"/>
     </form>
 
-<#--<#list instrument as instrument>
-    <div>
-        <p><b><a href = "${idCateg}/instrument/${instrument.idInst}"> ${instrument.instName} </a></b>${instrument.instPrice} BYN </p>
-    </div>
-    <#else>
-    <h3>Товаров нет</h3>
-</#list>-->
-<#--<div class="card-columns">
-    <#list instrument as instrument>
-
-        <a href="/category/${idCateg}/instrument/${instrument.idInst}" class="product-link"> ${instrument.instName}
-            ${instrument.instPrice} BYN
-
-            <#if userPr.userEmail??>
-                <form action="/category/${idCateg}/${instrument.idInst}/bucket" method="get">
-                    <input type="submit" value="Добавить в корзину"/>
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                </form>
-            <#else>
-                Чтобы добавить товар в корзину - авторизуйтесь
-            </#if>
-        </a>
-    </#list>
-</div>-->
-
-
-<#--<#list instrument as instrument>
-    <div class="row row-cols-3 row-cols-md-3 g-4">
-    <div class="card text-white bg-dark my-3 product">
-    <a href="/category/${idCateg}/instrument/${instrument.idInst}" class="product-link">
-        <img class="card-img-top" src="/images/${instrument.previewImageId}">
-    </a>
-    <div class="card-body">
-        <h5 class="card-title">${instrument.instName}</h5>
-        <p class="card-text">${instrument.instPrice} BYN</p>
-        <#if userPr.userEmail??>
-            <form action="/category/${idCateg}/${instrument.idInst}/bucket" method="get">
-                <button type="submit" class="btn btn-outline-warning">Добавить в корзину</button>
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
-            </form>
-        <#else>
-            <p>Чтобы добавить товар в корзину - авторизуйтесь</p>
-        </#if>
-    </div>
-<#else>
-    <h1 style="text-align: center">Не найдено</h1>
-    </div>
-    </div>
-</#list>-->
-
     <div class="card-columns">
         <#list instrument as instrument>
             <a href="/category/${idCateg}/instrument/${instrument.idInst}" class="product-link">

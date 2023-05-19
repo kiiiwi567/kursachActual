@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class BucketDetailDTO {
+    private Long previewImgId;
     private String title;
     private Long idInst;
     private Double instPrice;
@@ -17,6 +18,7 @@ public class BucketDetailDTO {
     private Double sum;
 
     public BucketDetailDTO(Instrument instrument) {
+        this.previewImgId = instrument.getPreviewImageId();
         this.title = instrument.getInstName();
         this.idInst = instrument.getIdInst();
         this.instPrice = instrument.getInstPrice();
