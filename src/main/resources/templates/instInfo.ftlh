@@ -4,24 +4,14 @@
         <div class="container text-start" style="margin-top: 40px;">
             <div class="row">
                 <div class="col-xxl-6">
-                    <#--<div class="simple-slider">
-                        <div class="swiper-container">
-                            <div class="swiper-wrapper">
-                                <#list images as img>
-                                    <div class="swiper-slide"
-                                         style="background: center center / cover no-repeat;padding-bottom: 0px;margin-bottom: 80px;">
-                                    </div>
-                                    <img src="/images/${img.idImg}">
-                                </#list>
-                            </div>
-                            <div class="swiper-pagination"></div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        </div>
-                    </div>-->
+                    <div class="row row-cols-3">
+                        <#list images as img>
+                            <img src="/images/${img.idImg}" height="200px"/><br><br>
+                        </#list>
+                    </div>
                 </div>
                 <div class="col"><h1>${instrument.instName}</h1>
-                    <p style="font-weight: bold;color: var(--bs-danger);font-size: 30px;">${instrument.instPrice}</p>
+                    <p style="font-weight: bold;color: var(--bs-danger);font-size: 30px;">${instrument.instPrice} BYN</p>
                     <p>${instrument.instDescription}</p>
                     <#if userPr.userEmail??>
                         <form action="/category/${idCateg}/${instrument.idInst}/bucket"

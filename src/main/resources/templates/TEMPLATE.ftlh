@@ -5,15 +5,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Home - Brand</title>
-        <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../static/css/styles.min.css">
+        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/styles.min.css">
     </head>
     <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="54">
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="/"
                style="font-family: Anton, sans-serif;">&nbsp;<img
-                        src="../static/img/mainLogo.png"
+                        src="/static/img/mainLogo.png"
                         style="width: 50px;padding-top: 0px;padding-bottom: 0px;margin-bottom: 9px;">&nbsp;VolumeUp!</a>
             <#if userPr.userEmail??>
                 <#if userPr.isAdmin()>
@@ -22,11 +22,11 @@
                     </button>
                 </#if>
                 <a href="/bucket">
-                    <img src="../static/img/cartIcon.png"
+                    <img src="/static/img/cartIcon.png"
                          width="32" height="32" class="rounded">
                 </a>
                 <a href="/user/profile">
-                    <img src="../static/img/userIcon.png"
+                    <img src="/static/img/userIcon.png"
                          width="32" height="32" class="rounded-circle">
                 </a>
             <#else>
@@ -52,8 +52,8 @@
             </div>
         </div>
     </footer>
-    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../static/js/script.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/script.min.js"></script>
     </body>
     </html>
 </#macro>
